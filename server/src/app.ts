@@ -14,7 +14,9 @@ app.use(
   })
 );
 app.use(cookieParser());
-
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'OK', message: 'Server is running' });
+});
 app.use("/api/orders", orderRoutes);
 app.use("/api/fulfillment", fulfillmentRoutes);
 app.use("/api/users", userRoutes);
