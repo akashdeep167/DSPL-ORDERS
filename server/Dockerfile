@@ -1,24 +1,17 @@
-# Use Node 18 base image
-FROM node:18-alpine
-
-# Set working directory
 WORKDIR /app
 
-# Copy package files and install dependencies
+# Install dependencies
 COPY package*.json ./
 RUN npm ci
 
-# Copy all source code
+# Copy source code
 COPY . .
 
-# Generate Prisma client
+# Generate Prisma client in source folder
 RUN npx prisma generate
 
 # Build TypeScript
 RUN npm run build
 
-# Expose port (if your app listens on 3000)
-EXPOSE 3000
-
-# Start the app
+# Start app
 CMD ["node", "dist/index.js"]
