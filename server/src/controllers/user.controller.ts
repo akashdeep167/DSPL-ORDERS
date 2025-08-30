@@ -23,8 +23,8 @@ type GroupedUsers = {
 
 const cookieOptions = {
   httpOnly: true,
-  sameSite: "none" as const,
-  secure: process.env.NODE_ENV === "production",
+  sameSite: "none",
+  secure: true,
 };
 
 export const login = async (req: Request, res: Response) => {
@@ -355,7 +355,6 @@ export const getCurrentUser = async (req: Request, res: Response) => {
 
 export const logout = (req: Request, res: Response) => {
   try {
-    const isProd = process.env.NODE_ENV === "production";
     res.clearCookie("accessToken", { ...cookieOptions, path: "/" });
     res.clearCookie("refreshToken", { ...cookieOptions, path: "/" });
     return res.status(200).json({ message: "user Successfully logged out" });
