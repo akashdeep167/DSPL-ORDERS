@@ -23,7 +23,7 @@ type GroupedUsers = {
 
 const cookieOptions = {
   httpOnly: true,
-  sameSite: "none",
+  sameSite: "none" as const,
   secure: true,
 };
 
